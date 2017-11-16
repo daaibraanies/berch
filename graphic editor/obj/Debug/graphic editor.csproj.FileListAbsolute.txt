@@ -1,0 +1,19 @@
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\bin\Debug\graphic editor.exe.config
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\bin\Debug\graphic editor.exe
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\bin\Debug\graphic editor.pdb
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\obj\Debug\graphic editor.csprojResolveAssemblyReference.cache
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\obj\Debug\graphic_editor.Form1.resources
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\obj\Debug\graphic_editor.Properties.Resources.resources
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\obj\Debug\graphic editor.csproj.GenerateResource.Cache
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\obj\Debug\graphic editor.exe
+D:\Work Dir\Visual Studio\graphic editor\graphic editor\obj\Debug\graphic editor.pdb
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\bin\Debug\graphic editor.exe.config
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic editor.exe
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic editor.pdb
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic editor.csprojResolveAssemblyReference.cache
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic_editor.Form1.resources
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic_editor.Properties.Resources.resources
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic editor.csproj.GenerateResource.Cache
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\bin\Debug\graphic editor.exe
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\bin\Debug\graphic editor.pdb
+C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic_editor.itmOptions.resources
