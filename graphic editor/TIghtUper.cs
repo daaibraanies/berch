@@ -75,8 +75,6 @@ namespace graphic_editor
             complexes.Add(complexLine);
             TreeListControl.AddNewInfoComplex(complexLine);
             Form1.TreeSelectedLines.Clear();
-            
-
 
         }
         

@@ -51,11 +51,15 @@ namespace graphic_editor
             this.selectBtn = new System.Windows.Forms.Button();
             this.tranferBtn = new System.Windows.Forms.Button();
             this.fixBTN = new System.Windows.Forms.Button();
-            this.perpendicularBTN = new System.Windows.Forms.Button();
             this.clearBtn = new System.Windows.Forms.Button();
+            this.parallelBTN = new System.Windows.Forms.Button();
+            this.perpendicularBTN = new System.Windows.Forms.Button();
+            this.AngleBTN = new System.Windows.Forms.Button();
+            this.VertAlignBTN = new System.Windows.Forms.Button();
+            this.HorizontalAlignBTN = new System.Windows.Forms.Button();
             this.drawingPanel = new System.Windows.Forms.PictureBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.angleTestUI = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.ComplexBTN = new System.Windows.Forms.Button();
             this.SectionControlTable.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.informPanel.SuspendLayout();
@@ -119,18 +123,19 @@ namespace graphic_editor
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.informPanel, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 0, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.49541F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.50459F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(207, 527);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // informPanel
             // 
-            this.informPanel.Controls.Add(this.angleTestUI);
-            this.informPanel.Controls.Add(this.label23);
+            this.informPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.informPanel.Controls.Add(this.lineLengthFLD);
             this.informPanel.Controls.Add(this.currentActionUI);
             this.informPanel.Controls.Add(this.labelAction);
@@ -140,16 +145,16 @@ namespace graphic_editor
             this.informPanel.Controls.Add(this.label2);
             this.informPanel.Controls.Add(this.label1);
             this.informPanel.ForeColor = System.Drawing.SystemColors.Control;
-            this.informPanel.Location = new System.Drawing.Point(3, 290);
+            this.informPanel.Location = new System.Drawing.Point(3, 279);
             this.informPanel.Name = "informPanel";
-            this.informPanel.Size = new System.Drawing.Size(200, 234);
+            this.informPanel.Size = new System.Drawing.Size(200, 224);
             this.informPanel.TabIndex = 0;
             // 
             // lineLengthFLD
             // 
             this.lineLengthFLD.AutoSize = true;
             this.lineLengthFLD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lineLengthFLD.Location = new System.Drawing.Point(137, 9);
+            this.lineLengthFLD.Location = new System.Drawing.Point(52, 35);
             this.lineLengthFLD.Name = "lineLengthFLD";
             this.lineLengthFLD.Size = new System.Drawing.Size(15, 15);
             this.lineLengthFLD.TabIndex = 8;
@@ -158,26 +163,26 @@ namespace graphic_editor
             // currentActionUI
             // 
             this.currentActionUI.AutoSize = true;
-            this.currentActionUI.Location = new System.Drawing.Point(38, 9);
+            this.currentActionUI.Location = new System.Drawing.Point(66, 9);
             this.currentActionUI.Name = "currentActionUI";
-            this.currentActionUI.Size = new System.Drawing.Size(32, 13);
+            this.currentActionUI.Size = new System.Drawing.Size(62, 13);
             this.currentActionUI.TabIndex = 7;
-            this.currentActionUI.Text = "Draw";
+            this.currentActionUI.Text = "Рисование";
             // 
             // labelAction
             // 
             this.labelAction.AutoSize = true;
             this.labelAction.Location = new System.Drawing.Point(0, 9);
             this.labelAction.Name = "labelAction";
-            this.labelAction.Size = new System.Drawing.Size(40, 13);
+            this.labelAction.Size = new System.Drawing.Size(60, 13);
             this.labelAction.TabIndex = 6;
-            this.labelAction.Text = "Action:";
+            this.labelAction.Text = "Действие:";
             // 
             // endPointUI
             // 
             this.endPointUI.AutoSize = true;
             this.endPointUI.ForeColor = System.Drawing.SystemColors.Control;
-            this.endPointUI.Location = new System.Drawing.Point(123, 35);
+            this.endPointUI.Location = new System.Drawing.Point(105, 95);
             this.endPointUI.Margin = new System.Windows.Forms.Padding(3);
             this.endPointUI.Name = "endPointUI";
             this.endPointUI.Size = new System.Drawing.Size(13, 13);
@@ -188,7 +193,7 @@ namespace graphic_editor
             // 
             this.startPointUI.AutoSize = true;
             this.startPointUI.ForeColor = System.Drawing.SystemColors.Control;
-            this.startPointUI.Location = new System.Drawing.Point(32, 35);
+            this.startPointUI.Location = new System.Drawing.Point(105, 65);
             this.startPointUI.Margin = new System.Windows.Forms.Padding(3);
             this.startPointUI.Name = "startPointUI";
             this.startPointUI.Size = new System.Drawing.Size(13, 13);
@@ -199,54 +204,62 @@ namespace graphic_editor
             // 
             this.label.AutoSize = true;
             this.label.ForeColor = System.Drawing.SystemColors.Control;
-            this.label.Location = new System.Drawing.Point(94, 35);
+            this.label.Location = new System.Drawing.Point(3, 95);
             this.label.Margin = new System.Windows.Forms.Padding(3);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(29, 13);
+            this.label.Size = new System.Drawing.Size(89, 13);
             this.label.TabIndex = 4;
-            this.label.Text = "End:";
+            this.label.Text = "Конечная точка:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(0, 35);
+            this.label2.Location = new System.Drawing.Point(3, 65);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Start:";
+            this.label2.Text = "Начальная точка:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(93, 9);
+            this.label1.Location = new System.Drawing.Point(0, 35);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Length:";
+            this.label1.Text = "Длиина:";
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 5;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.ComplexBTN, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.drawBtn, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.selectBtn, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tranferBtn, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.fixBTN, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.perpendicularBTN, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.clearBtn, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.parallelBTN, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.perpendicularBTN, 4, 1);
+            this.tableLayoutPanel3.Controls.Add(this.AngleBTN, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.VertAlignBTN, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.HorizontalAlignBTN, 3, 1);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.37931F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(201, 76);
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.16667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.83333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(201, 122);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // drawBtn
@@ -254,9 +267,9 @@ namespace graphic_editor
             this.drawBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("drawBtn.BackgroundImage")));
             this.drawBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.drawBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.drawBtn.Location = new System.Drawing.Point(3, 3);
+            this.drawBtn.Location = new System.Drawing.Point(4, 4);
             this.drawBtn.Name = "drawBtn";
-            this.drawBtn.Size = new System.Drawing.Size(32, 31);
+            this.drawBtn.Size = new System.Drawing.Size(32, 35);
             this.drawBtn.TabIndex = 1;
             this.drawBtn.Click += new System.EventHandler(this.drawBtn_Click_1);
             // 
@@ -265,9 +278,9 @@ namespace graphic_editor
             this.selectBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("selectBtn.BackgroundImage")));
             this.selectBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.selectBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.selectBtn.Location = new System.Drawing.Point(3, 40);
+            this.selectBtn.Location = new System.Drawing.Point(4, 46);
             this.selectBtn.Name = "selectBtn";
-            this.selectBtn.Size = new System.Drawing.Size(32, 32);
+            this.selectBtn.Size = new System.Drawing.Size(32, 31);
             this.selectBtn.TabIndex = 2;
             this.selectBtn.Click += new System.EventHandler(this.selectBtn_Click);
             // 
@@ -276,9 +289,9 @@ namespace graphic_editor
             this.tranferBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tranferBtn.BackgroundImage")));
             this.tranferBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tranferBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.tranferBtn.Location = new System.Drawing.Point(41, 3);
+            this.tranferBtn.Location = new System.Drawing.Point(44, 4);
             this.tranferBtn.Name = "tranferBtn";
-            this.tranferBtn.Size = new System.Drawing.Size(33, 31);
+            this.tranferBtn.Size = new System.Drawing.Size(33, 35);
             this.tranferBtn.TabIndex = 3;
             this.tranferBtn.Click += new System.EventHandler(this.tranferBtn_Click);
             // 
@@ -287,34 +300,77 @@ namespace graphic_editor
             this.fixBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fixBTN.BackgroundImage")));
             this.fixBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.fixBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.fixBTN.Location = new System.Drawing.Point(81, 3);
+            this.fixBTN.Location = new System.Drawing.Point(84, 4);
             this.fixBTN.Name = "fixBTN";
-            this.fixBTN.Size = new System.Drawing.Size(33, 31);
+            this.fixBTN.Size = new System.Drawing.Size(33, 35);
             this.fixBTN.TabIndex = 5;
             this.fixBTN.Click += new System.EventHandler(this.fixBTN_Click);
-            // 
-            // perpendicularBTN
-            // 
-            this.perpendicularBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("perpendicularBTN.BackgroundImage")));
-            this.perpendicularBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.perpendicularBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.perpendicularBTN.Image = ((System.Drawing.Image)(resources.GetObject("perpendicularBTN.Image")));
-            this.perpendicularBTN.Location = new System.Drawing.Point(81, 40);
-            this.perpendicularBTN.Name = "perpendicularBTN";
-            this.perpendicularBTN.Size = new System.Drawing.Size(33, 32);
-            this.perpendicularBTN.TabIndex = 6;
-            this.perpendicularBTN.Click += new System.EventHandler(this.perpendicularBTN_Click);
             // 
             // clearBtn
             // 
             this.clearBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("clearBtn.BackgroundImage")));
             this.clearBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.clearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.clearBtn.Location = new System.Drawing.Point(41, 40);
+            this.clearBtn.Location = new System.Drawing.Point(44, 46);
             this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(33, 32);
+            this.clearBtn.Size = new System.Drawing.Size(33, 31);
             this.clearBtn.TabIndex = 4;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click_1);
+            // 
+            // parallelBTN
+            // 
+            this.parallelBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("parallelBTN.BackgroundImage")));
+            this.parallelBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.parallelBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.parallelBTN.Location = new System.Drawing.Point(164, 4);
+            this.parallelBTN.Name = "parallelBTN";
+            this.parallelBTN.Size = new System.Drawing.Size(33, 35);
+            this.parallelBTN.TabIndex = 7;
+            this.parallelBTN.Click += new System.EventHandler(this.parallelBTN_Click);
+            // 
+            // perpendicularBTN
+            // 
+            this.perpendicularBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("perpendicularBTN.BackgroundImage")));
+            this.perpendicularBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.perpendicularBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.perpendicularBTN.Location = new System.Drawing.Point(164, 46);
+            this.perpendicularBTN.Name = "perpendicularBTN";
+            this.perpendicularBTN.Size = new System.Drawing.Size(33, 31);
+            this.perpendicularBTN.TabIndex = 6;
+            this.perpendicularBTN.Click += new System.EventHandler(this.perpendicularBTN_Click);
+            // 
+            // AngleBTN
+            // 
+            this.AngleBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AngleBTN.BackgroundImage")));
+            this.AngleBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.AngleBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.AngleBTN.Location = new System.Drawing.Point(84, 46);
+            this.AngleBTN.Name = "AngleBTN";
+            this.AngleBTN.Size = new System.Drawing.Size(33, 31);
+            this.AngleBTN.TabIndex = 8;
+            this.AngleBTN.Click += new System.EventHandler(this.AngleBTN_Click);
+            // 
+            // VertAlignBTN
+            // 
+            this.VertAlignBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("VertAlignBTN.BackgroundImage")));
+            this.VertAlignBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.VertAlignBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.VertAlignBTN.Location = new System.Drawing.Point(124, 4);
+            this.VertAlignBTN.Name = "VertAlignBTN";
+            this.VertAlignBTN.Size = new System.Drawing.Size(33, 35);
+            this.VertAlignBTN.TabIndex = 9;
+            this.VertAlignBTN.Click += new System.EventHandler(this.VertAlignBTN_Click);
+            // 
+            // HorizontalAlignBTN
+            // 
+            this.HorizontalAlignBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HorizontalAlignBTN.BackgroundImage")));
+            this.HorizontalAlignBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.HorizontalAlignBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.HorizontalAlignBTN.Location = new System.Drawing.Point(124, 46);
+            this.HorizontalAlignBTN.Name = "HorizontalAlignBTN";
+            this.HorizontalAlignBTN.Size = new System.Drawing.Size(33, 30);
+            this.HorizontalAlignBTN.TabIndex = 10;
+            this.HorizontalAlignBTN.Click += new System.EventHandler(this.HorizontalAlignBTN_Click);
             // 
             // drawingPanel
             // 
@@ -331,23 +387,23 @@ namespace graphic_editor
             this.drawingPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawingPanel_MouseMove);
             this.drawingPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawingPanel_MouseUp);
             // 
-            // label23
+            // flowLayoutPanel1
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(10, 169);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(46, 13);
-            this.label23.TabIndex = 9;
-            this.label23.Text = "ANGLE:";
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 509);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 15);
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // angleTestUI
+            // ComplexBTN
             // 
-            this.angleTestUI.AutoSize = true;
-            this.angleTestUI.Location = new System.Drawing.Point(62, 169);
-            this.angleTestUI.Name = "angleTestUI";
-            this.angleTestUI.Size = new System.Drawing.Size(13, 13);
-            this.angleTestUI.TabIndex = 10;
-            this.angleTestUI.Text = "0";
+            this.ComplexBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ComplexBTN.BackgroundImage")));
+            this.ComplexBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ComplexBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ComplexBTN.Location = new System.Drawing.Point(4, 84);
+            this.ComplexBTN.Name = "ComplexBTN";
+            this.ComplexBTN.Size = new System.Drawing.Size(33, 34);
+            this.ComplexBTN.TabIndex = 11;
+            this.ComplexBTN.Click += new System.EventHandler(this.ComplexBTN_Click);
             // 
             // Form1
             // 
@@ -394,8 +450,12 @@ namespace graphic_editor
         private Button clearBtn;
         private Button fixBTN;
         private Button perpendicularBTN;
-        private Label angleTestUI;
-        private Label label23;
+        private Button parallelBTN;
+        private Button AngleBTN;
+        private Button VertAlignBTN;
+        private Button HorizontalAlignBTN;
+        private Button ComplexBTN;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

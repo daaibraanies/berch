@@ -10,7 +10,7 @@ namespace graphic_editor
    public static class MyLogger
     {
         #region DATA       
-        private const string  filePath = @"C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\LOGS.txt";
+        private const string  filePath = @"C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\LOGS.txt";
         public enum Importance
         {
             Info,

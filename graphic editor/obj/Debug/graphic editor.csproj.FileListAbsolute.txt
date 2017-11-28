@@ -17,3 +17,13 @@ C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic edi
 C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\bin\Debug\graphic editor.exe
 C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\bin\Debug\graphic editor.pdb
 C:\Users\daaibraanies\Desktop\pixbox editor\graphic editor\obj\Debug\graphic_editor.itmOptions.resources
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\bin\Debug\graphic editor.exe.config
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic editor.exe
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic editor.pdb
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\bin\Debug\graphic editor.exe
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\bin\Debug\graphic editor.pdb
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic editor.csprojResolveAssemblyReference.cache
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic_editor.Form1.resources
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic_editor.itmOptions.resources
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic_editor.Properties.Resources.resources
+C:\Users\daaibraanies\Desktop\pixbox editor\berch\graphic editor\obj\Debug\graphic editor.csproj.GenerateResource.Cache

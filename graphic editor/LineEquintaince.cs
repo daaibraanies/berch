@@ -76,7 +76,7 @@ namespace graphic_editor
 
             if((A*A2+B*B2)==0) //parallelni
             {
-                MyLogger.LogIt("fiejfef");
+                MyLogger.LogIt("alredy parallel");
             }
 
                 A2 = -(B * B2) / A;

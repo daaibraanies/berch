@@ -308,7 +308,16 @@ namespace graphic_editor
                         TightUper.ComplexTransfer(e, currentLine);
                         break;
                     }
-                    else if (!currentLine.Fixed && currentLine.LineType == Types.Single)
+                    else if(currentLine.Fixed)
+                    {
+
+                        string message = "Элемент зафиксирован.";
+                        string caption = "Действие невозможно.";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        DialogResult result;
+                        result = MessageBox.Show(message, caption, buttons);
+                    }
+                    else
                     {
                         currentLine._deltaStart = new Point(currentLine.StartPoint.X - e.Location.X,
                                                         currentLine.StartPoint.Y - e.Location.Y);
@@ -332,7 +341,7 @@ namespace graphic_editor
                 {
                     if (currentLine.LineType == Types.Single)
                     {
-                        Form1.WrapperForSelectedLines = currentLine;            //NEED TO FIX
+                        Form1.WrapperForSelectedLines = currentLine;          
 
                         if (Form1.TreeSelectedLines.Contains(currentLine))
                         {
@@ -379,6 +388,8 @@ namespace graphic_editor
                         currentLine.Fixed = true;
                         currentLine.PenColor = Line.FIXED_COLOR;
                         TreeListControl.RefreshTreeList(currentLine);
+
+                        Form1.TreeSelectedLines.Clear();
                         break;
                     }
                     else if (currentLine.Fixed)
@@ -386,6 +397,8 @@ namespace graphic_editor
                         currentLine.Fixed = false;
                         currentLine.PenColor = Line.GENERAL_COLOR;
                         TreeListControl.RefreshTreeList(currentLine);
+
+                        Form1.TreeSelectedLines.Clear();
                         break;
                     }
                 }
@@ -640,7 +653,10 @@ namespace graphic_editor
                                 double rotationAngle;
                                 anglePHI = LineEquintaince.AngleBetweenTwoLines(selectedLineEquainteince, modelLineEquainteince);
                                 double angle = anglePHI * (180 / Math.PI);      //ttest
-                                double dA = -angle;
+                                double dA = 180-angle;
+
+                                if (dA < 0)
+                                    dA *= (-1);
 
                                 rotationAngle = dA * Math.PI / 180;
 
@@ -667,6 +683,14 @@ namespace graphic_editor
                                 break;
                             }
                         }
+                    }
+                    else
+                    {
+                        string message = "Не удается определить точку на линии.";
+                        string caption = "Ошибка.";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        DialogResult result;
+                        result = MessageBox.Show(message, caption, buttons);
                     }
                 }
             }

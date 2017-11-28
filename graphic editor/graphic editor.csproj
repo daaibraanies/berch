@@ -102,13 +102,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Angle.png" />
     <Content Include="Images\FixICon.png" />
+    <Content Include="Images\HorizontalAlign.png" />
+    <Content Include="Images\newAlignHorizontally.png" />
+    <Content Include="Images\newAlignVertically.png" />
+    <Content Include="Images\NewAngle.png" />
+    <Content Include="Images\newCombine.png" />
+    <Content Include="Images\newParallelTo.png" />
+    <Content Include="Images\newPerpendicularTo.png" />
+    <Content Include="Images\ParallelLineTO.png" />
+    <Content Include="Images\ParallelTO.png" />
     <Content Include="Images\perpend.png" />
     <Content Include="Images\TransferIcon - Копировать.png" />
     <Content Include="Images\TransferIcon.png" />
     <Content Include="Images\clearIcon.png" />
     <Content Include="Images\LineIcon.png" />
     <Content Include="Images\selectIcon.png" />
+    <Content Include="Images\VerticalAlign.png" />
     <Content Include="LOGS.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

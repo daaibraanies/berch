@@ -46,7 +46,7 @@ namespace graphic_editor
             MakeParallelTo,                                                    //Сдлелать линию параллельной другой         
             MakeOrthogonal,                                                    //Сдлелать линию перепендикулярной другой            
             Angle,                                                             //Вывести угол между линиями
-            Rotate                                                             //Вращать НЕ РЕАЛИЗОВАНО (ДУМАЮ НЕ БУДУ)
+            Combine
         }
 
 
@@ -74,7 +74,6 @@ namespace graphic_editor
             InfoPanel.startPointInfo = startPointUI;
             InfoPanel.endPointInfo = endPointUI;
             InfoPanel.currentActionInfo = currentActionUI;
-            InfoPanel.angleMouse = angleTestUI;
             InfoPanel.INFOPANEL_INIT();
 
             g = drawingPanel.CreateGraphics();                                      //Создаем графическое полотно на панели
@@ -153,7 +152,7 @@ namespace graphic_editor
             if (keyData == Keys.P)
             {
                 CURRENT_ACTION = Action.MakeParallelTo;
-                InfoPanel.currentActionInfo.Text = "Parallelling";
+                InfoPanel.currentActionInfo.Text = "Параллельность к.";
                 
             }
 
@@ -166,53 +165,53 @@ namespace graphic_editor
             if (keyData ==  Keys.D)
             {
                 CURRENT_ACTION = Action.Draw;
-                InfoPanel.currentActionInfo.Text = "Draw";
+                InfoPanel.currentActionInfo.Text = "Рисование.";
             }
 
             if (keyData == Keys.C)
             {
                 CURRENT_ACTION = Action.Delete;
-                InfoPanel.currentActionInfo.Text = "Delete";
+                InfoPanel.currentActionInfo.Text = "Удаление.";
             }
 
             if (keyData == Keys.S)
             { 
                 CURRENT_ACTION = Action.Select;
-                InfoPanel.currentActionInfo.Text = "Select";
+                InfoPanel.currentActionInfo.Text = "Выбор.";
             }
 
             if (keyData == Keys.T)
             {
                 CURRENT_ACTION = Action.Transfer;
-                InfoPanel.currentActionInfo.Text = "Transfer";
+                InfoPanel.currentActionInfo.Text = "Перемещение.";
             }
                 
             if (keyData == Keys.F)
             {
                 CURRENT_ACTION = Action.Fix;
-                InfoPanel.currentActionInfo.Text = "Fixation";
+                InfoPanel.currentActionInfo.Text = "Фиксация";
             }
 
             if (keyData == Keys.Q)
             {
                 CURRENT_ACTION = Action.AlignHorizontally;
-                InfoPanel.currentActionInfo.Text = "Hor. align";
+                InfoPanel.currentActionInfo.Text = "Выровнять гор.";
             }
             if (keyData == Keys.W)
             {
                 CURRENT_ACTION = Action.AlignVertically;
-                InfoPanel.currentActionInfo.Text = "Vert. align";
+                InfoPanel.currentActionInfo.Text = "Выровнять верт.";
             }
             if (keyData == Keys.E)
             {
                 CURRENT_ACTION = Action.MakeParallelTo;
-                InfoPanel.currentActionInfo.Text = "Parallel to";
+                InfoPanel.currentActionInfo.Text = "Параллельность к.";
             }
 
             if(keyData == Keys.O)
             {
                 CURRENT_ACTION = Action.MakeOrthogonal;
-                InfoPanel.currentActionInfo.Text = "Orthogonaliz.";
+                InfoPanel.currentActionInfo.Text = "Ортогональность к.";
 
                 string message = "Линия которая будет повернута, затем относительно которой будет повернута."; 
                 string caption = "Виберите линию.";
@@ -224,12 +223,7 @@ namespace graphic_editor
             if(keyData == Keys.A)
             {
                 CURRENT_ACTION = Action.Angle;
-                InfoPanel.currentActionInfo.Text = "Angle |_.";
-            }
-            if(keyData == Keys.R)
-            {
-                InfoPanel.currentActionInfo.Text = "Rotate";
-                CURRENT_ACTION = Action.Rotate;
+                InfoPanel.currentActionInfo.Text = "Угол.";
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -272,7 +266,7 @@ namespace graphic_editor
                 if (CURRENT_ACTION==Action.Transfer)             
                     {
                         /*Перемещение единственной линии*/
-                        if (WrapperForSelectedLines != null)              
+                        if (WrapperForSelectedLines != null && !WrapperForSelectedLines.Fixed)              
                         {
                             WrapperForSelectedLines.PenColor = Line.EDITORIAL_COLOR;
 
@@ -465,35 +459,76 @@ namespace graphic_editor
         private void tranferBtn_Click(object sender, EventArgs e)
         {
             CURRENT_ACTION = Action.Transfer;
-            InfoPanel.currentActionInfo.Text = "Transfer";
+            InfoPanel.currentActionInfo.Text = "Перемещение";
         }
         private void selectBtn_Click(object sender, EventArgs e)
         {
             CURRENT_ACTION = Action.Select;
-            InfoPanel.currentActionInfo.Text = "Select";
+            InfoPanel.currentActionInfo.Text = "Выбор";
         }
         private void drawBtn_Click_1(object sender, EventArgs e)
         {
             CURRENT_ACTION = Action.Draw;
-            InfoPanel.currentActionInfo.Text = "Draw";
+            InfoPanel.currentActionInfo.Text = "Рисование";
         }
         private void clearBtn_Click_1(object sender, EventArgs e)
         {
             CURRENT_ACTION = Action.Delete;
-            InfoPanel.currentActionInfo.Text = "Delete";
+            InfoPanel.currentActionInfo.Text = "Удаление";
         }
         private void fixBTN_Click(object sender, EventArgs e)
         {
             CURRENT_ACTION = Action.Fix;
-            InfoPanel.currentActionInfo.Text = "Fix";
+            InfoPanel.currentActionInfo.Text = "Фиксация";
         }
         private void perpendicularBTN_Click(object sender, EventArgs e)
         {
             CURRENT_ACTION = Action.MakeOrthogonal;
-            InfoPanel.currentActionInfo.Text = "Orthogonaliz.";
+            InfoPanel.currentActionInfo.Text = "Ортогональность к.";
         }
         #endregion
 
+        private void parallelBTN_Click(object sender, EventArgs e)
+        {
+            CURRENT_ACTION = Action.MakeParallelTo;
+            InfoPanel.currentActionInfo.Text = "Паралльность к.";
+        }
+
+        private void AngleBTN_Click(object sender, EventArgs e)
+        {
+            CURRENT_ACTION = Action.Angle;
+            InfoPanel.currentActionInfo.Text = "Угол.";
+        }
+
+        private void VertAlignBTN_Click(object sender, EventArgs e)
+        {
+            CURRENT_ACTION = Action.AlignVertically;
+            InfoPanel.currentActionInfo.Text = "Выравнять верт.";
+        }
+
+        private void HorizontalAlignBTN_Click(object sender, EventArgs e)
+        {
+            CURRENT_ACTION = Action.AlignHorizontally;
+            InfoPanel.currentActionInfo.Text = "Выравнять гор.";
+        }
+
+        private void ComplexBTN_Click(object sender, EventArgs e)
+        {
+            if(TreeSelectedLines.Count>1)
+            {
+                InfoPanel.currentActionInfo.Text = "Объединение";
+                TightUper.TightUp(TreeSelectedLines);
+                TreeListControl.TreeSource.Refresh();
+            }else
+            {
+                string message = "Выделите 2 и более линий для объединения.";
+                string caption = "Действие невозможно.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+                result = MessageBox.Show(message, caption, buttons);
+            }
+
+        }
     }
 
 }
