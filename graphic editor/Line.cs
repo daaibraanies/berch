@@ -646,16 +646,18 @@ namespace graphic_editor
                             LineEquintaince modelLineEquainteince = new LineEquintaince(currentLine);                  //ОРИЕНТИР ОРТОГАНАЛИЗАЦИИИ. Уравненеия конечно
                             LineEquintaince selectedLineEquainteince = new LineEquintaince(lineToParallel);        //ОБЪЕКТ ОРТОГАНАЛИЗАЦИИИ.   Уравненеия конечно
 
-                            bool alreadyParallel = ((int)modelLineEquainteince.K == (int)selectedLineEquainteince.K);
+                            bool alreadyParallel = (modelLineEquainteince.K == selectedLineEquainteince.K);
                             if (!alreadyParallel)
                             {
                                 double anglePHI;
                                 double rotationAngle;
                                 anglePHI = LineEquintaince.AngleBetweenTwoLines(selectedLineEquainteince, modelLineEquainteince);
                                 double angle = anglePHI * (180 / Math.PI);      //ttest
-                                double dA = 180-angle;
+                                double dA = 180 - angle;
 
-                                if (dA < 0)
+                                //if (dA < 0)
+                                    //dA *= (-1);
+                                 if (lineToParallel.EndPoint.Y<lineToParallel.StartPoint.Y)
                                     dA *= (-1);
 
                                 rotationAngle = dA * Math.PI / 180;
