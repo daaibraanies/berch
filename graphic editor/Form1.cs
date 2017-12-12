@@ -46,7 +46,8 @@ namespace graphic_editor
             MakeParallelTo,                                                    //Сдлелать линию параллельной другой         
             MakeOrthogonal,                                                    //Сдлелать линию перепендикулярной другой            
             Angle,                                                             //Вывести угол между линиями
-            Combine
+            Combine,
+            FixPoint
         }
 
 
@@ -113,6 +114,8 @@ namespace graphic_editor
                     Line.MakeParallelLine(e.Location);
                 if (CURRENT_ACTION == Action.Angle)
                     Line.ShowAngleBetween(e.Location);
+                if (CURRENT_ACTION == Action.FixPoint)
+                    Line.FixPointOnLine(e.Location);
 
             }
             drawingPanel.Refresh();    
@@ -224,6 +227,12 @@ namespace graphic_editor
             {
                 CURRENT_ACTION = Action.Angle;
                 InfoPanel.currentActionInfo.Text = "Угол.";
+            }
+
+            if(keyData==Keys.N)
+            {
+                CURRENT_ACTION = Action.FixPoint;
+                InfoPanel.currentActionInfo.Text = "Фиксация точки";
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -528,6 +537,12 @@ namespace graphic_editor
                 result = MessageBox.Show(message, caption, buttons);
             }
 
+        }
+
+        private void FIxPointBTN_Click(object sender, EventArgs e)
+        {
+            CURRENT_ACTION = Action.FixPoint;
+            InfoPanel.currentActionInfo.Text = "Фиксация точки";
         }
     }
 

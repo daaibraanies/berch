@@ -35,8 +35,15 @@ namespace graphic_editor
             Single,         //Просто линия
             Complex        //если мы их объединили
         };                        /*Определение типов линии*/
-        public Types LineType;                      /*тип линии*/
+        public enum FixedPointPosition
+        {
+            Start,
+            End,
+            Center
+        }
 
+        public FixedPointPosition FixedPoint;
+        public Types LineType;                      /*тип линии*/
         public List<Line> commonLines;                                                      //не помню для чгео оставил
         static private List<Line> linesForOrthogonalization = new List<Line>();             //не помню для чгео оставил
         #endregion
@@ -109,19 +116,6 @@ namespace graphic_editor
             set { _penSize = value; }
         }
 
-        /* public float Slope
-        {
-            get
-            {
-                return (((float)_endPoint.Y - (float)_strartPoint.Y) / ((float)_endPoint.X - (float)_strartPoint.X));
-            }
-        }*/         //использовалось для определения принадлежности точки линии [X]
-
-        /*public float YIntercept
-         {
-             get { return _strartPoint.Y - Slope * _strartPoint.X; }
-         }*/    //использовалось для определения принадлежности точки линии [X]
-
         public int Length
         {
             get
@@ -147,7 +141,6 @@ namespace graphic_editor
 
 
 
-
         #endregion
 
         #region Constructors
@@ -169,11 +162,13 @@ namespace graphic_editor
             _horizontalDirection = 1;
             _verticalDirection = -1;
             commonLines = new List<Line>();
+            FixedPoint = FixedPointPosition.Center;
         }
 
         #endregion
 
         #region Functions
+
         public void DrawStartPoints(PaintEventArgs g)
         {
 
@@ -216,6 +211,15 @@ namespace graphic_editor
         {
             float rd = Math.Abs(_strartPoint.X - p.X);
             float kd = Math.Abs(_strartPoint.Y - p.Y);
+            if (rd <= cusion && kd <= cusion)
+                return true;
+            else
+                return false;
+        }
+        public bool isCentralPoint(Point p, int cusion = 5)
+        {
+            float rd = Math.Abs(LineCenter.X - p.X);
+            float kd = Math.Abs(LineCenter.Y - p.Y);
             if (rd <= cusion && kd <= cusion)
                 return true;
             else
@@ -434,7 +438,6 @@ namespace graphic_editor
                 MyLogger.LogIt(ex.Message, MyLogger.Importance.Fatal);
             }
         }
-     
         public static void AlignHorizontally(MouseEventArgs e)
         {
             foreach (Line currentLine in Form1._allLines)
@@ -488,38 +491,6 @@ namespace graphic_editor
                 }
             }
         }
-       
-        
-        /* public static void AlignHorizontally(MouseEventArgs e)
-        {
-            foreach (Line currentLine in Form1._allLines)
-            {
-                if (currentLine.PointOnLineSegment(e.Location))
-                {
-                    if (
-                        currentLine.LineType == Types.Single &&
-                        !currentLine.Fixed
-                        )
-                    {
-                        Point tmp = Point.Empty;
-                        Point tmp2 = Point.Empty;
-
-                        tmp.Y = currentLine.LineCenter.Y;
-                        tmp.X = currentLine.StartPoint.X;
-                        tmp2.Y = tmp.Y;
-                        tmp2.X = currentLine.EndPoint.X;
-
-
-
-                        currentLine.StartPoint = tmp;
-                        currentLine.EndPoint = tmp2;
-                        break;
-                    }
-
-                }
-            }
-        }*/
-
         public static void AlignVertivally(MouseEventArgs e)
         {
             foreach (Line currentLine in Form1._allLines)
@@ -596,34 +567,71 @@ namespace graphic_editor
                                 anglePHI = LineEquintaince.AngleBetweenTwoLines(selectedLineEquainteince, modelLineEquainteince);
                                 double angle = anglePHI * (180 / Math.PI);      //ttest
                                 double dA = 90 - angle;
-                                /*if (dA > 90)
-                                    dA %= 90;*/
-                                if (dA < 0)
+
+                                if (lineToBeoRthogonal.EndPoint.Y > lineToBeoRthogonal.StartPoint.Y)
                                     dA *= (-1);
 
                                 rotationAngle = -dA * Math.PI / 180;
 
-                                Point modifiedStart = new Point(
-                                    (int)(-Math.Sin(rotationAngle) * (lineToBeoRthogonal.StartPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Cos(rotationAngle) *
-                                    (lineToBeoRthogonal.StartPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.X),     //x1
+                                if (lineToBeoRthogonal.FixedPoint == FixedPointPosition.Center)  //если точку поворота не фиксирвали производить вращение относительно центра
+                                {
 
-                                    (int)(Math.Cos(rotationAngle) * (lineToBeoRthogonal.StartPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Sin(rotationAngle) *
-                                    (lineToBeoRthogonal.StartPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.Y)      //y1
-                                    );
+                                    Point modifiedStart = new Point(
+                                        (int)(-Math.Sin(rotationAngle) * (lineToBeoRthogonal.StartPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Cos(rotationAngle) *
+                                        (lineToBeoRthogonal.StartPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.X),     //x1
 
-                                Point modifiedEnd = new Point(
-                                    (int)(-Math.Sin(rotationAngle) * (lineToBeoRthogonal.EndPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Cos(rotationAngle) *
-                                    (lineToBeoRthogonal.EndPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.X),     //x2
+                                        (int)(Math.Cos(rotationAngle) * (lineToBeoRthogonal.StartPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Sin(rotationAngle) *
+                                        (lineToBeoRthogonal.StartPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.Y)      //y1
+                                        );
 
-                                    (int)(Math.Cos(rotationAngle) * (lineToBeoRthogonal.EndPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Sin(rotationAngle) *
-                                    (lineToBeoRthogonal.EndPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.Y)      //y2
-                                    );
+                                    Point modifiedEnd = new Point(
+                                        (int)(-Math.Sin(rotationAngle) * (lineToBeoRthogonal.EndPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Cos(rotationAngle) *
+                                        (lineToBeoRthogonal.EndPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.X),     //x2
 
-                                lineToBeoRthogonal.StartPoint = modifiedStart;
-                                lineToBeoRthogonal.EndPoint = modifiedEnd;
-                                lineToBeoRthogonal.PenColor = Line.GENERAL_COLOR;
-                                Form1.WrapperForSelectedLines = null;
-                                break;
+                                        (int)(Math.Cos(rotationAngle) * (lineToBeoRthogonal.EndPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Sin(rotationAngle) *
+                                        (lineToBeoRthogonal.EndPoint.X - lineToBeoRthogonal.LineCenter.X) + lineToBeoRthogonal.LineCenter.Y)      //y2
+                                        );
+
+                                    lineToBeoRthogonal.StartPoint = modifiedStart;
+                                    lineToBeoRthogonal.EndPoint = modifiedEnd;
+                                    lineToBeoRthogonal.PenColor = Line.GENERAL_COLOR;
+                                    Form1.WrapperForSelectedLines = null;
+                                    break;
+                                }                                   //точка вращаения зафиксирована пользователем
+                                else
+                                {
+                                    if(lineToBeoRthogonal.FixedPoint==FixedPointPosition.Start)    //фиксирована начальная точка
+                                    {
+
+                                        Point modifiedEnd = new Point(
+                                            (int)(-Math.Sin(rotationAngle) * (lineToBeoRthogonal.EndPoint.Y - lineToBeoRthogonal.StartPoint.Y) + Math.Cos(rotationAngle) *
+                                            (lineToBeoRthogonal.EndPoint.X - lineToBeoRthogonal.StartPoint.X) + lineToBeoRthogonal.StartPoint.X),     //x2
+
+                                            (int)(Math.Cos(rotationAngle) * (lineToBeoRthogonal.EndPoint.Y - lineToBeoRthogonal.LineCenter.Y) + Math.Sin(rotationAngle) *
+                                            (lineToBeoRthogonal.EndPoint.X - lineToBeoRthogonal.StartPoint.X) + lineToBeoRthogonal.StartPoint.Y)      //y2
+                                            );
+
+                                        lineToBeoRthogonal.EndPoint = modifiedEnd;
+                                        lineToBeoRthogonal.PenColor = Line.GENERAL_COLOR;
+                                        Form1.WrapperForSelectedLines = null;
+                                        break;
+                                    }
+                                    else if(lineToBeoRthogonal.FixedPoint == FixedPointPosition.End)   //фиксирована конечная точка
+                                    {
+                                        Point modifiedStart = new Point(
+                                            (int)(-Math.Sin(rotationAngle) * (lineToBeoRthogonal.StartPoint.Y - lineToBeoRthogonal.EndPoint.Y) + Math.Cos(rotationAngle) *
+                                            (lineToBeoRthogonal.StartPoint.X - lineToBeoRthogonal.EndPoint.X) + lineToBeoRthogonal.EndPoint.X),     //x1
+
+                                            (int)(Math.Cos(rotationAngle) * (lineToBeoRthogonal.StartPoint.Y - lineToBeoRthogonal.EndPoint.Y) + Math.Sin(rotationAngle) *
+                                            (lineToBeoRthogonal.StartPoint.X - lineToBeoRthogonal.EndPoint.X) + lineToBeoRthogonal.EndPoint.Y)      //y1
+                                            );
+
+                                        lineToBeoRthogonal.StartPoint = modifiedStart;
+                                        lineToBeoRthogonal.PenColor = Line.GENERAL_COLOR;
+                                        Form1.WrapperForSelectedLines = null;
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -661,28 +669,64 @@ namespace graphic_editor
                                     dA *= (-1);
 
                                 rotationAngle = dA * Math.PI / 180;
+                                if(lineToParallel.FixedPoint == FixedPointPosition.Center)
+                                {
 
-                                Point modifiedStart = new Point(
-                                    (int)(-Math.Sin(rotationAngle) * (lineToParallel.StartPoint.Y - lineToParallel.LineCenter.Y) + Math.Cos(rotationAngle) *
-                                    (lineToParallel.StartPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.X),     //x1
+                                    Point modifiedStart = new Point(
+                                        (int)(-Math.Sin(rotationAngle) * (lineToParallel.StartPoint.Y - lineToParallel.LineCenter.Y) + Math.Cos(rotationAngle) *
+                                        (lineToParallel.StartPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.X),     //x1
 
-                                    (int)(Math.Cos(rotationAngle) * (lineToParallel.StartPoint.Y - lineToParallel.LineCenter.Y) + Math.Sin(rotationAngle) *
-                                    (lineToParallel.StartPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.Y)      //y1
-                                    );
+                                        (int)(Math.Cos(rotationAngle) * (lineToParallel.StartPoint.Y - lineToParallel.LineCenter.Y) + Math.Sin(rotationAngle) *
+                                        (lineToParallel.StartPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.Y)      //y1
+                                        );
 
-                                Point modifiedEnd = new Point(
-                                    (int)(-Math.Sin(rotationAngle) * (lineToParallel.EndPoint.Y - lineToParallel.LineCenter.Y) + Math.Cos(rotationAngle) *
-                                    (lineToParallel.EndPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.X),     //x2
+                                    Point modifiedEnd = new Point(
+                                        (int)(-Math.Sin(rotationAngle) * (lineToParallel.EndPoint.Y - lineToParallel.LineCenter.Y) + Math.Cos(rotationAngle) *
+                                        (lineToParallel.EndPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.X),     //x2
 
-                                    (int)(Math.Cos(rotationAngle) * (lineToParallel.EndPoint.Y - lineToParallel.LineCenter.Y) + Math.Sin(rotationAngle) *
-                                    (lineToParallel.EndPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.Y)      //y2
-                                    );
+                                        (int)(Math.Cos(rotationAngle) * (lineToParallel.EndPoint.Y - lineToParallel.LineCenter.Y) + Math.Sin(rotationAngle) *
+                                        (lineToParallel.EndPoint.X - lineToParallel.LineCenter.X) + lineToParallel.LineCenter.Y)      //y2
+                                        );
 
-                                lineToParallel.StartPoint = modifiedStart;
-                                lineToParallel.EndPoint = modifiedEnd;
-                                Form1.WrapperForSelectedLines.PenColor = Line.GENERAL_COLOR;
-                                Form1.WrapperForSelectedLines = null;
-                                break;
+                                    lineToParallel.StartPoint = modifiedStart;
+                                    lineToParallel.EndPoint = modifiedEnd;
+                                    Form1.WrapperForSelectedLines.PenColor = Line.GENERAL_COLOR;
+                                    Form1.WrapperForSelectedLines = null;
+                                    break;
+                                }
+                                else
+                                {
+                                    if(lineToParallel.FixedPoint == FixedPointPosition.Start)
+                                    {
+                                        Point modifiedEnd = new Point(
+                                            (int)(-Math.Sin(rotationAngle) * (lineToParallel.EndPoint.Y - lineToParallel.StartPoint.Y) + Math.Cos(rotationAngle) *
+                                            (lineToParallel.EndPoint.X - lineToParallel.StartPoint.X) + lineToParallel.StartPoint.X),     //x2
+
+                                            (int)(Math.Cos(rotationAngle) * (lineToParallel.EndPoint.Y - lineToParallel.StartPoint.Y) + Math.Sin(rotationAngle) *
+                                            (lineToParallel.EndPoint.X - lineToParallel.StartPoint.X) + lineToParallel.StartPoint.Y)      //y2
+                                        );
+
+                                        lineToParallel.EndPoint = modifiedEnd;
+                                        Form1.WrapperForSelectedLines.PenColor = Line.GENERAL_COLOR;
+                                        Form1.WrapperForSelectedLines = null;
+                                        break;
+                                    }
+                                    else if (lineToParallel.FixedPoint == FixedPointPosition.End)
+                                    {
+                                        Point modifiedStart = new Point(
+                                            (int)(-Math.Sin(rotationAngle) * (lineToParallel.StartPoint.Y - lineToParallel.EndPoint.Y) + Math.Cos(rotationAngle) *
+                                            (lineToParallel.StartPoint.X - lineToParallel.EndPoint.X) + lineToParallel.EndPoint.X),     //x1
+
+                                            (int)(Math.Cos(rotationAngle) * (lineToParallel.StartPoint.Y - lineToParallel.EndPoint.Y) + Math.Sin(rotationAngle) *
+                                            (lineToParallel.StartPoint.X - lineToParallel.EndPoint.X) + lineToParallel.EndPoint.Y)      //y1
+                                        );
+
+                                        lineToParallel.StartPoint = modifiedStart;
+                                        Form1.WrapperForSelectedLines.PenColor = Line.GENERAL_COLOR;
+                                        Form1.WrapperForSelectedLines = null;
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -722,8 +766,45 @@ namespace graphic_editor
                 }
             }
         }
+        public static void FixPointOnLine(Point pointToFix)
+        {
 
+            foreach(Line currentLine in Form1._allLines)
+            {
+                if (currentLine.isEndPoint(pointToFix, 10))
+                {
+                    currentLine.FixedPoint = FixedPointPosition.End;
+                    string message = "Точка вращения зафиксирована как конечная точка линии.";
+                    string caption = "Точка зафиксирована";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+                    result = MessageBox.Show(message, caption, buttons);
+                }
+                    
 
+                else if (currentLine.isStartPoint(pointToFix, 10))
+                {
+                    currentLine.FixedPoint = FixedPointPosition.Start;
+                    string message = "Точка вращения зафиксирована как начальная точка линии.";
+                    string caption = "Точка зафиксирована";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+                    result = MessageBox.Show(message, caption, buttons);
+                }
+                
+                else if(currentLine.isCentralPoint(pointToFix,10))
+                {
+                    currentLine.FixedPoint = FixedPointPosition.Center;
+                    string message = "Точка вращения зафиксирована как центральная точка линии.";
+                    string caption = "Точка зафиксирована";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+                    result = MessageBox.Show(message, caption, buttons);
+                }    
+
+            }
+
+        }
 
         #endregion
     }

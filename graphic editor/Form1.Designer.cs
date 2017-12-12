@@ -47,6 +47,7 @@ namespace graphic_editor
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.ComplexBTN = new System.Windows.Forms.Button();
             this.drawBtn = new System.Windows.Forms.Button();
             this.selectBtn = new System.Windows.Forms.Button();
             this.tranferBtn = new System.Windows.Forms.Button();
@@ -57,9 +58,9 @@ namespace graphic_editor
             this.AngleBTN = new System.Windows.Forms.Button();
             this.VertAlignBTN = new System.Windows.Forms.Button();
             this.HorizontalAlignBTN = new System.Windows.Forms.Button();
-            this.drawingPanel = new System.Windows.Forms.PictureBox();
+            this.FIxPointBTN = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.ComplexBTN = new System.Windows.Forms.Button();
+            this.drawingPanel = new System.Windows.Forms.PictureBox();
             this.SectionControlTable.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.informPanel.SuspendLayout();
@@ -253,14 +254,26 @@ namespace graphic_editor
             this.tableLayoutPanel3.Controls.Add(this.AngleBTN, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.VertAlignBTN, 3, 0);
             this.tableLayoutPanel3.Controls.Add(this.HorizontalAlignBTN, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.FIxPointBTN, 1, 2);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.16667F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.83333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(201, 122);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(201, 123);
             this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // ComplexBTN
+            // 
+            this.ComplexBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ComplexBTN.BackgroundImage")));
+            this.ComplexBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ComplexBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ComplexBTN.Location = new System.Drawing.Point(4, 84);
+            this.ComplexBTN.Name = "ComplexBTN";
+            this.ComplexBTN.Size = new System.Drawing.Size(33, 34);
+            this.ComplexBTN.TabIndex = 11;
+            this.ComplexBTN.Click += new System.EventHandler(this.ComplexBTN_Click);
             // 
             // drawBtn
             // 
@@ -372,6 +385,24 @@ namespace graphic_editor
             this.HorizontalAlignBTN.TabIndex = 10;
             this.HorizontalAlignBTN.Click += new System.EventHandler(this.HorizontalAlignBTN_Click);
             // 
+            // FIxPointBTN
+            // 
+            this.FIxPointBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FIxPointBTN.BackgroundImage")));
+            this.FIxPointBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.FIxPointBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.FIxPointBTN.Location = new System.Drawing.Point(44, 84);
+            this.FIxPointBTN.Name = "FIxPointBTN";
+            this.FIxPointBTN.Size = new System.Drawing.Size(33, 34);
+            this.FIxPointBTN.TabIndex = 12;
+            this.FIxPointBTN.Click += new System.EventHandler(this.FIxPointBTN_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 509);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 15);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
             // drawingPanel
             // 
             this.drawingPanel.BackColor = System.Drawing.Color.White;
@@ -386,24 +417,6 @@ namespace graphic_editor
             this.drawingPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawingPanel_MouseDown);
             this.drawingPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawingPanel_MouseMove);
             this.drawingPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawingPanel_MouseUp);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 509);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 15);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // ComplexBTN
-            // 
-            this.ComplexBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ComplexBTN.BackgroundImage")));
-            this.ComplexBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ComplexBTN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ComplexBTN.Location = new System.Drawing.Point(4, 84);
-            this.ComplexBTN.Name = "ComplexBTN";
-            this.ComplexBTN.Size = new System.Drawing.Size(33, 34);
-            this.ComplexBTN.TabIndex = 11;
-            this.ComplexBTN.Click += new System.EventHandler(this.ComplexBTN_Click);
             // 
             // Form1
             // 
@@ -456,6 +469,7 @@ namespace graphic_editor
         private Button HorizontalAlignBTN;
         private Button ComplexBTN;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Button FIxPointBTN;
     }
 }
 

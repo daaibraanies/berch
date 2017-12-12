@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="Images\Angle.png" />
     <Content Include="Images\FixICon.png" />
+    <Content Include="Images\fixPos.png" />
     <Content Include="Images\HorizontalAlign.png" />
     <Content Include="Images\newAlignHorizontally.png" />
     <Content Include="Images\newAlignVertically.png" />
